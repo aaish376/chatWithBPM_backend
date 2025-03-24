@@ -18,8 +18,18 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 
+# import os
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')  # Correct path
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),  # Ensure you have a "static" folder in your project
+# ]
 
 
 # Quick-start development settings - unsuitable for production
