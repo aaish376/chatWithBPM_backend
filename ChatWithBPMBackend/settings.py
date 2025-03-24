@@ -32,7 +32,8 @@ SECRET_KEY = 'django-insecure-wve4sa)-a07xf(*vv%ei^z)*jvzs3x381jzy=!z1&*t8!=%=n1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -108,14 +109,19 @@ LOGIN_URL = "/api/auth/login/"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# import dj_database_url
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+# }
 DATABASES = {
     'default': {
-"ENGINE": "django.db.backends.postgresql",
-        "NAME": "newdb",
-        "USER": "asad",
-        "PASSWORD": "asad123",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "defaultdb",
+        "USER": "avnadmin",
+        "PASSWORD": "AVNS_NgL2J_9WjErn5Y2zoZr",
+        "HOST": "bpmdb-chatwithbpm.f.aivencloud.com",
+        "PORT": "15371",
     }
 }
 
@@ -164,10 +170,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:5181",
+   
+# ]
+
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5180",
-    "https://chatwithbpm.netlify.app/",
+    "https://chatwithbpm.netlify.app"
 ]
+
 
 from datetime import timedelta
 
