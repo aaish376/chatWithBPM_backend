@@ -8,5 +8,5 @@ whitenoise>=6.6.0
 psycopg2-binary>=2.9.9  # PostgreSQL support
 requests>=2.31.0  # API calls (used for Gemini API)
 python-dotenv>=1.0.1  # Environment variable management
-google-generativeai
+
 
