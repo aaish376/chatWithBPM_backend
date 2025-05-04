@@ -18,7 +18,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 SECRET_KEY = 'django-insecure-wve4sa)-a07xf(*vv%ei^z)*jvzs3x381jzy=!z1&*t8!=%=n1'
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['chatwithbpm-backend.onrender.com',  'localhost', '127.0.0.1']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
