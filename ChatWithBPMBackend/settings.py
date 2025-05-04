@@ -15,12 +15,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
-SECRET_KEY = 'django-insecure-wve4sa)-a07xf(*vv%ei^z)*jvzs3x381jzy=!z1&*t8!=%=n1'
-DEBUG = True
 
-# ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = ['chatwithbpm-backend.onrender.com',  'localhost', '127.0.0.1']
+
+# SECRET_KEY = 'django-insecure-wve4sa)-a07xf(*vv%ei^z)*jvzs3x381jzy=!z1&*t8!=%=n1'
+# DEBUG = True
+# # ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['chatwithbpm-backend.onrender.com',  'localhost', '127.0.0.1']
+
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-default-secret-key")
+DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+
 
 
 INSTALLED_APPS = [
