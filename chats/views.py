@@ -113,9 +113,9 @@ def delete_chat(request, bpmid):
     # Delete related queries first
     Query.objects.filter(bpm=bpm).delete()
 
-    # Delete BPMN file from storage
-    if bpm.xml_file:
-        default_storage.delete(bpm.xml_file.path)
+    # # Delete BPMN file from storage
+    # if bpm.xml_file:
+    #     default_storage.delete(bpm.xml_file.path)
 
     # Delete BPMN record
     bpm.delete()
