@@ -19,7 +19,7 @@ def convert_bpmn_to_nl(xml_content):
     
     try:
         response = model.generate_content(prompt)
-        return format_gemini_response(response.text.stripe())
+        return format_gemini_response(response.text)
         # return response.text.strip()
     except Exception as e:
         return f"Error in processing BPM to NLD: {str(e)}"
