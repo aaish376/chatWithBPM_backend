@@ -1,16 +1,5 @@
 from .config import get_gemini_model
 
-import re
-
-def format_gemini_response(raw_text):
-    # Convert **bold** to <strong> tags
-    formatted = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', raw_text)
-    # Convert numbered list formatting (optional tweak)
-    formatted = re.sub(r'(\d+)\.\s', r'<br>\1. ', formatted)
-    # Convert other newlines to <br>
-    formatted = formatted.replace('\n', '<br>')
-    return formatted
-
 
 def convert_bpmn_to_nl(xml_content):
     """Sends BPMN XML to Gemini API and gets natural language description."""
@@ -19,8 +8,7 @@ def convert_bpmn_to_nl(xml_content):
     
     try:
         response = model.generate_content(prompt)
-        return format_gemini_response(response.text)
-        # return response.text.strip()
+        return response.text.strip()
     except Exception as e:
         return f"Error in processing BPM to NLD: {str(e)}"
 
