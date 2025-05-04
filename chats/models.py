@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class BPMs(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255, blank=True, null=True)  # Will be auto-generated
-    xml_file = models.FileField(upload_to='bpmn_files/')
+    # xml_file = models.FileField(upload_to='bpmn_files/')
+    xml_content = models.TextField(blank=True, null=True)  # Will store raw XML content
     description = models.TextField(blank=True, null=True)  # Will be auto-generated
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

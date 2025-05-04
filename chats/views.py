@@ -7,6 +7,13 @@ from .utils import convert_bpmn_to_nl, generate_query_response
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
+
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .models import BPMs
+from .utils import convert_bpmn_to_nl  # assuming you have this utility
+
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def upload_bpmn(request):
@@ -14,13 +21,16 @@ def upload_bpmn(request):
         return Response({"error": "No file provided"}, status=400)
 
     file = request.FILES["file"]
-    user = request.user  # JWT will provide the authenticated user
+    user = request.user  # Provided by JWT authentication
 
-    saved_path = default_storage.save(f"bpmn_files/{file.name}", ContentFile(file.read()))
+    xml_text = file.read().decode("utf-8")
 
-    bpm = BPMs.objects.create(user=user, xml_file=saved_path)
+    bpm = BPMs.objects.create(
+        user=user,
+        xml_content=xml_text,
+    )
     bpm.title = f"BPMN Process {bpm.id}"
-    bpm.description = convert_bpmn_to_nl(saved_path)
+    bpm.description = convert_bpmn_to_nl(xml_text)
     bpm.save()
 
     return Response({
@@ -28,6 +38,28 @@ def upload_bpmn(request):
         "title": bpm.title,
         "description": bpm.description
     }, status=201)
+
+# @api_view(["POST"])
+# @permission_classes([IsAuthenticated])
+# def upload_bpmn(request):
+#     if "file" not in request.FILES:
+#         return Response({"error": "No file provided"}, status=400)
+
+#     file = request.FILES["file"]
+#     user = request.user  # JWT will provide the authenticated user
+
+#     saved_path = default_storage.save(f"bpmn_files/{file.name}", ContentFile(file.read()))
+
+#     bpm = BPMs.objects.create(user=user, xml_file=saved_path)
+#     bpm.title = f"BPMN Process {bpm.id}"
+#     bpm.description = convert_bpmn_to_nl(saved_path)
+#     bpm.save()
+
+#     return Response({
+#         "bpmid": bpm.id,
+#         "title": bpm.title,
+#         "description": bpm.description
+#     }, status=201)
 
 
 @api_view(["POST"])
