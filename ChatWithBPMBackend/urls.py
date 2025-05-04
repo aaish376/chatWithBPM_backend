@@ -23,6 +23,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("accounts.urls")),  # API endpoints for auth
     path('api/', include('chats.urls')),  # API enpoints for chats
-    path("rag/", include("rag.urls")),
+    # path("rag/", include("rag.urls")),
 ]
 

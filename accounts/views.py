@@ -44,6 +44,7 @@ class LoginView(APIView):
 # ✅ User Registration API
 class RegisterView(APIView):
     def post(self, request):
+        print("Request Data:", request.data)
         serializer = UserSerializer(data=request.data)
 
         if serializer.is_valid():
