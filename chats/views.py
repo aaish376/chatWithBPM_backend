@@ -76,10 +76,10 @@ def send_query(request):
     query = Query.objects.create(bpm=bpm, text=query_text, response=response_text)
 
     return Response({
-        "queryid": query.id,
-        "query": query.text,
+        "id": query.id,
+        "text": query.text,
         "response": query.response,
-        "timestamp": query.created_at.isoformat()
+        "created_at": query.created_at.isoformat()
     }, status=201)
 
 
