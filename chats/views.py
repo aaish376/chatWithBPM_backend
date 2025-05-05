@@ -29,7 +29,7 @@ def upload_bpmn(request):
         user=user,
         xml_content=xml_text,
     )
-    bpm.title = f"BPMN Process {bpm.id}"
+    bpm.title = file.name
     bpm.description = convert_bpmn_to_nl(xml_text)
     bpm.save()
 
