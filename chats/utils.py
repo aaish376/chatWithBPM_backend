@@ -4,7 +4,7 @@ from .config import get_gemini_model
 def convert_bpmn_to_nl(xml_content):
     """Sends BPMN XML to Gemini API and gets natural language description."""
     model = get_gemini_model()
-    prompt = f"Convert this BPMN XML into a detailed process description:\n{xml_content}"
+    prompt = f"Convert this BPMN XML into a detailed process description.Do not use Markdown formatting (like `*`, `_`, `#`, or triple backticks).Use only valid HTML: <p>, <strong>, <ul>, <li>, <h3>, etc.Wrap everything in a <div> tag at the end.Stay strictly within the BPMN content below:Convert this BPMN XML into a detailed process description and don't add anything by yourself just stay within the context of our BPMN:\n{xml_content}"
     
     try:
         response = model.generate_content(prompt)
@@ -15,7 +15,7 @@ def convert_bpmn_to_nl(xml_content):
 def generate_query_response(des, query_text):
     """Sends BPMN XML to Gemini API and gets natural language description."""
     model = get_gemini_model()
-    prompt = f"this is  context:\n ```{des}```\n\n answer the following query from above\n```{query_text}```"
+    prompt = f"this is  context:\n ```{des}```\n\n answer the following query from above, if query related answer does not exists say Irrelevant query, in response Do not use Markdown formatting (like `*`, `_`, `#`, or triple backticks).Use only valid HTML: <p>, <strong>, <ul>, <li>, <h3>, etc.Wrap everything in a <div> tag at the end.\n```{query_text}```"
     
     try:
         response = model.generate_content(prompt)
