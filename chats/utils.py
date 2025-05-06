@@ -4,12 +4,16 @@ from .config import get_gemini_model
 def convert_bpmn_to_nl(xml_content):
     """Sends BPMN XML to Gemini API and gets natural language description."""
     model = get_gemini_model()
-    prompt = f"""Convert this BPMN XML into a detailed process description.
+    prompt = f"""
+    This is BPM (Business Process Model): \n ```{xml_content}```\n\n
+    Convert this BPMN XML into a detailed process description in layman language 
+    without using complex BPMN notations or technical terms
+    and don't add anything by yourself just stay within the context of our BPM:\n```{xml_content}```
+    do styling in response like bold, bullet points headungs etc, 
     Do not use Markdown formatting (like `*`, `_`, `#`, or triple backticks).
     Use only valid HTML: <p>, <strong>, <ul>, <li>, <h3>, etc.
     Wrap everything in a <div> tag at the end.Stay strictly within the BPMN content below:
-    Convert this BPMN XML into a detailed process description in layman language without using complex BPMN notations
-    and don't add anything by yourself just stay within the context of our BPMN:\n{xml_content}"""
+    """
     
     try:
         response = model.generate_content(prompt)
@@ -20,7 +24,16 @@ def convert_bpmn_to_nl(xml_content):
 def generate_query_response(des, query_text):
     """Sends BPMN XML to Gemini API and gets natural language description."""
     model = get_gemini_model()
-    prompt = f"this is  context:\n ```{des}```\n\n answer the following query from above, if query or question or requirement is irrelevant to above context say Irrelevant query, in response Do not use Markdown formatting (like `*`, `_`, `#`, or triple backticks).Use only valid HTML: <p>, <strong>, <ul>, <li>, <h3>, etc.Wrap everything in a <div> tag at the end.\n```{query_text}```"
+    prompt = f"""
+    this is  context:\n ```{des}```\n\n 
+    this is query: \n ```{query_text}```\n\n
+    Give Answer to the query from given context (only answer from context do not halucinate or add from yourself), 
+    if query is somehow related to context but answer does not exist in context then say Answer does not found in BPM,
+    if query is to explain the context then do explain,
+    if query is irrelevant to above context say Irrelevant query,
+    do styling in response like bold, bullet points headungs etc, 
+    but in response do not use Markdown formatting (like `*`, `_`, `#`, or triple backticks).
+    Use only valid HTML: <p>, <strong>, <ul>, <li>, <h3>, etc.Wrap everything in a <div> tag at the end.\n"""
     
     try:
         response = model.generate_content(prompt)
