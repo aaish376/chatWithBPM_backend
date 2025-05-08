@@ -13,7 +13,7 @@ def convert_bpmn_to_nl(xml_content):
     """
     
     try:
-        response = model.create(
+        response = model.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}]
         )
@@ -37,13 +37,14 @@ def generate_query_response(des, query_text):
     """
     
     try:
-        response = model.create(
+        response = model.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}]
         )
         return response['choices'][0]['message']['content'].strip()
     except Exception as e:
         return f"Error in responding to query: {str(e)}"
+
 
 # from .config import get_gemini_model
 

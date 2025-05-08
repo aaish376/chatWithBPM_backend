@@ -9,7 +9,8 @@ def get_chatgpt_model():
     if not OPENAI_API_KEY:
         raise ValueError("API key not found. Set the OPENAI_API_KEY environment variable.")
     print("API key loaded successfully")
-    return openai.ChatCompletion
+    return openai
+
 
 # import google.generativeai as genai
 # from django.conf import settings
