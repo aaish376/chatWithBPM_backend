@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 # Load API key
-GEMINI_API_KEY = "AIzaSyDGk3wQUbKZeTBCTfoGEFejFUpkF4RtBf4"
+GEMINI_API_KEY = "AIzaSyBIMyKSniqR7BhdfwITSSQrBeREIXB4chY"
 genai.configure(api_key=GEMINI_API_KEY)
 
 def get_gemini_model():
