@@ -5,11 +5,12 @@ import os
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
-def get_chatgpt_model():
+def get_text_generation_model():
     if not OPENAI_API_KEY:
         raise ValueError("API key not found. Set the OPENAI_API_KEY environment variable.")
     print("API key loaded successfully")
     return openai
+
 
 
 # import google.generativeai as genai

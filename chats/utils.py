@@ -1,8 +1,8 @@
-from .config import get_chatgpt_model
+from .config import get_text_generation_model
 
 def convert_bpmn_to_nl(xml_content):
-    """Sends BPMN XML to ChatGPT API and gets natural language description."""
-    model = get_chatgpt_model()
+    """Sends BPMN XML to OpenAI API and gets natural language description."""
+    model = get_text_generation_model()
     prompt = f"""
     This is a BPM (Business Process Model): \n ```{xml_content}```\n\n
     Convert this BPMN XML into a detailed process description in layman language 
@@ -13,18 +13,20 @@ def convert_bpmn_to_nl(xml_content):
     """
     
     try:
-        response = model.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}]
+        response = model.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            max_tokens=1500,
+            temperature=0.7
         )
-        return response['choices'][0]['message']['content'].strip()
+        return response['choices'][0]['text'].strip()
     except Exception as e:
         return f"Error in processing BPM to NLD: {str(e)}"
 
 
 def generate_query_response(des, query_text):
-    """Generates a response to a query using ChatGPT API."""
-    model = get_chatgpt_model()
+    """Generates a response to a query using OpenAI API."""
+    model = get_text_generation_model()
     prompt = f"""
     This is the context:\n ```{des}```\n\n 
     This is the query: \n ```{query_text}```\n\n
@@ -37,13 +39,16 @@ def generate_query_response(des, query_text):
     """
     
     try:
-        response = model.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": prompt}]
+        response = model.Completion.create(
+            model="text-davinci-003",
+            prompt=prompt,
+            max_tokens=1500,
+            temperature=0.7
         )
-        return response['choices'][0]['message']['content'].strip()
+        return response['choices'][0]['text'].strip()
     except Exception as e:
         return f"Error in responding to query: {str(e)}"
+
 
 
 # from .config import get_gemini_model
