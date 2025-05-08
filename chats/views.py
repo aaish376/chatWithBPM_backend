@@ -70,7 +70,7 @@ def send_query(request):
 
     bpm = get_object_or_404(BPMs, id=bpm_id, user=request.user)
 
-    # print(bpm.description)
+    print(bpm.description)
 
     response_text = generate_query_response(bpm.description, query_text)
     query = Query.objects.create(bpm=bpm, text=query_text, response=response_text)

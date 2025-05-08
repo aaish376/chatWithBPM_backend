@@ -19,7 +19,9 @@ def convert_bpmn_to_nl(xml_content):
                 {"role": "user", "content": prompt}
             ]
         )
-        return completion['choices'][0]['message']['content'].strip()
+        # Properly accessing the response content
+        response_content = completion.choices[0].message.content.strip()
+        return response_content
     except Exception as e:
         return f"Error in processing BPM to NLD: {str(e)}"
 
@@ -45,9 +47,13 @@ def generate_query_response(des, query_text):
                 {"role": "user", "content": prompt}
             ]
         )
-        return completion['choices'][0]['message']['content'].strip()
+        # Properly accessing the response content
+        response_content = completion.choices[0].message.content.strip()
+        return response_content
     except Exception as e:
         return f"Error in responding to query: {str(e)}"
+
+
 
 
 
