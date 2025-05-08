@@ -89,9 +89,9 @@ def get_chats(request):
     bpmns = BPMs.objects.filter(user=request.user).order_by("-id").values("id", "title", "description")  # Order by descending ID
     
     # Print all BPMNs in the console
-    print("Fetched BPMNs for user:", request.user.username)
-    for bpm in bpmns:
-        print(f"ID: {bpm['id']}, Title: {bpm['title']}, Description: {bpm['description']}")
+    # print("Fetched BPMNs for user:", request.user.username)
+    # for bpm in bpmns:
+    #     print(f"ID: {bpm['id']}, Title: {bpm['title']}, Description: {bpm['description']}")
 
     return Response(list(bpmns))
 
