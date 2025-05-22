@@ -33,9 +33,9 @@ def generate_query_response(des, query_text):
     This is the context:\n ```{des}```\n\n 
     This is the query: \n ```{query_text}```\n\n
     Answer the query strictly from the given context. 
-    - If the query is somehow related to the context but the answer does not exist, say "Answer not found in BPM".
+    - If the query is somehow related to the context but the answer does not exist , explain user in few lines that Answer is not found in BPM.
     - If the query is to explain the context, provide a detailed explanation.
-    - If the query is irrelevant to the context, say "Irrelevant query".
+    - If the query is irrelevant to the context, explain user in few lines that your query is irrelevant .
     Use HTML formatting for response: <p>, <strong>, <ul>, <li>, <h3>, etc.
     Wrap the entire response in a <div> tag.
     """
